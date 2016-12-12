@@ -1,0 +1,19 @@
+<%
+    haveMenu = typeof pages != "undefined" && pages.length > 1;
+    var haveToc = typeof toc != "undefined";
+%>
+<% if (haveMenu) { %>
+    <ul class="menu">
+        <% for (var i = 0 ; i < pages.length ; i++) { %>
+            <%
+                var isCurrentPage = pages[i].path == path;
+            %>
+            <li>
+                <a href="<%= pages[i].path.replace(/\.md$/, ".html") %>" <%- (isCurrentPage) ? "class=\"active\"" : "" %>><%= pages[i].title || pages[i].path %></a>
+                <% if (haveToc && isCurrentPage) { %>
+                    <% include _toc.ejs %>
+                <% } %>
+            </li>
+        <% } %>
+    </ul>
+<% } %>

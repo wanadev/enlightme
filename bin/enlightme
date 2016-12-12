@@ -1,0 +1,175 @@
+#!/usr/bin/env node
+
+var process = require("process");
+var path = require("path");
+var fs = require("fs");
+
+var lodash = require("lodash");
+var Metalsmith = require("metalsmith");
+var ignore = require("metalsmith-ignore");
+var collections = require("metalsmith-collections");
+var metallic = require("metalsmith-metallic");
+var markdown = require("metalsmith-markdown");
+var autotoc = require("metalsmith-autotoc");
+var layouts = require("metalsmith-layouts");
+var less = require("metalsmith-less");
+var ejs = require("ejs");
+
+function _cleanGithubUrl(url) {
+    if (!url.match(/^(git\+)?(https:\/\/github.com\/[^\/]+\/[^\/]+?)(\.git)?$/)) {
+        return null;
+    }
+    return url.match(/^(git\+)?(https:\/\/github.com\/[^\/]+\/[^\/]+?)(\.git)?$/)[2];
+}
+
+function _isFile(path) {
+    try {
+        var stat = fs.statSync(path);
+        return stat.isFile();
+    }
+    catch (e) {
+        return false;
+    }
+}
+
+function _isDir(path) {
+    try {
+        var stat = fs.statSync(path);
+        return stat.isDirectory();
+    }
+    catch (e) {
+        return false;
+    }
+}
+
+var enlightmePkg = require(path.join(__dirname, "..", "package.json"));
+var appPkg = require(path.join(process.cwd(), "package.json"));
+
+var config = {
+    enlightmeVersion: enlightmePkg.version,
+    npmPackageName: appPkg.name,
+    npmPackageVersion: appPkg.version,
+    githubProjectUrl: (appPkg.repository && appPkg.repository.url) ? _cleanGithubUrl(appPkg.repository.url) : null,
+    appName: appPkg.name,
+    layoutsDir: path.join(__dirname, "..", "layouts"),
+    sourceDir: path.join(process.cwd(), "doc"),
+    outputDir: path.join(process.cwd(), "doc.generated"),
+    tocLevels: "h2, h3, h4",
+    logo: null,
+    favicon: null,
+    pageFooter: "Generated using <a href=\"https://wanadev.github.io/enlightme/\">Enlight'me</a> <%= enlightmeVersion %>"
+};
+
+if (appPkg.enlightme) {
+    lodash.merge(config, appPkg.enlightme);
+}
+
+var footerPath = path.join(config.sourceDir, "_footer");
+    console.log(footerPath);
+if (_isFile(footerPath)) {
+    config.pageFooter = fs.readFileSync(footerPath).toString();
+}
+
+if (!config.logo) {
+    var paths = [
+        config.npmPackageName + "-logo.svg",
+        config.npmPackageName + "-logo.png",
+        "logo.svg",
+        "logo.png",
+        "images/" + config.npmPackageName + "-logo.svg",
+        "images/" + config.npmPackageName + "-logo.png",
+        "images/" + "logo.svg",
+        "images/" + "logo.png",
+        "image/" + config.npmPackageName + "-logo.svg",
+        "image/" + config.npmPackageName + "-logo.png",
+        "image/" + "logo.svg",
+        "image/" + "logo.png",
+        "img/" + config.npmPackageName + "-logo.svg",
+        "img/" + config.npmPackageName + "-logo.png",
+        "img/" + "logo.svg",
+        "img/" + "logo.png"
+    ];
+    for (var i = 0 ; i < paths.length ; i++) {
+        if (_isFile(path.join(config.sourceDir, paths[i]))) {
+            config.logo = paths[i];
+            break;
+        }
+    }
+}
+
+if (!config.favicon) {
+    config.favicon = config.logo;
+    var paths = [
+        "favicon.svg",
+        "favicon.png",
+        "images/" + "favicon.svg",
+        "images/" + "favicon.png",
+        "image/" + "favicon.svg",
+        "image/" + "favicon.png",
+        "img/" + "favicon.svg",
+        "img/" + "favicon.png"
+    ];
+    for (var i = 0 ; i < paths.length ; i++) {
+        if (_isFile(path.join(config.sourceDir, paths[i]))) {
+            config.favicon = paths[i];
+            break;
+        }
+    }
+}
+
+// TODO check for local layouts
+
+config._ejs = ejs;
+config._config = config;
+
+Metalsmith(process.cwd())
+    .metadata(config)
+    .source(config.sourceDir)
+    .destination(config.outputDir)
+    .clean(true)
+    .use(ignore(["**/*.ejs"]))
+    .use(collections({
+        pages: {
+            pattern: "**/*.md",
+            sortBy: "menuOrder",
+            reverse: false
+        },
+        styles: {
+            pattern: ["**/*.less", "**/*.css"],
+        }
+    }))
+    .use(function(files, metalsmith) {
+        if (metalsmith._metadata.styles.length){
+            return;
+        }
+
+        var lessDir = path.join(__dirname, "..", "style");
+        var less = "@import \"" + path.join(lessDir, "enlightme.less") + "\";";
+
+        files["enlightme.less"] = {
+            contents: new Buffer(less),
+            mode: "0644",
+            stats: {},
+            path: "enlightme.less"
+        };
+
+        metalsmith._metadata.styles.push({path: "enlightme.less"});
+    })
+    .use(metallic())
+    .use(markdown())
+    .use(autotoc({
+        selector: config.tocLevels
+    }))
+    .use(layouts({
+        engine: "ejs",
+        default: "page.ejs",
+        pattern: "**/*.html",
+        directory: config.layoutsDir,
+    }))
+    .use(less())
+    .use(ignore(["**/*.less"]))
+    .build(function(error) {
+        if (error) {
+            throw error;
+        }
+    });

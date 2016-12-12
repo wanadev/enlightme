@@ -1,0 +1,69 @@
+<%
+
+    var pageTitle;
+    if (typeof title == "undefined") {
+        if (path != "index.md") {
+            pageTitle = path + " - " + appName;
+        } else {
+            pageTitle = appName;
+        }
+    } else if (title.toLowerCase() == "home") {
+        pageTitle = appName;
+    } else {
+        pageTitle = title + " - " + appName;
+    }
+
+    var haveMenu = typeof pages != "undefined" && pages.length > 1;
+    var haveToc = typeof toc != "undefined";
+
+    var bodyClasses = "";
+    if (haveMenu || haveToc) {
+        bodyClasses += " page-with-nav";
+    }
+
+%><!DOCTYPE html>
+
+<html>
+
+    <head>
+        <meta charset="UTF-8" />
+        <title><%= pageTitle %></title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <% if (favicon) { %>
+            <link rel="shortcut icon" type="image/png" href="<%= favicon %>" />
+        <% } %>
+        <% for (var i = 0 ; i < styles.length ; i++) { %>
+            <link type="text/css" rel="stylesheet" href="<%= styles[i].path.replace(/\.less$/, ".css") %>" />
+        <% } %>
+    </head>
+
+    <body class="<%= bodyClasses %>">
+        <header>
+            <h1>
+                <% if (logo) { %>
+                    <img src="<%= logo %>" %> alt="<%= appName %> logo" />
+                <% } %>
+                <span><%= appName %></span>
+            </h1>
+        </header>
+        <div class="content">
+
+            <% if (haveMenu || haveToc) { %>
+                <nav>
+                    <% if (haveMenu) { %>
+                        <% include _menu.ejs %>
+                    <% } else if (haveToc) { %>
+                        <% include _toc.ejs %>
+                    <% } %>
+                </nav>
+            <% } %>
+            <article>
+                <%- contents %>
+            </article>
+        </div>
+        <footer>
+            <%- _ejs.render(pageFooter, _config) %>
+        </footer>
+    </body>
+
+</html>
