@@ -177,7 +177,8 @@ Metalsmith(process.cwd())
         }
     });
 
-if (process.argv[1] == "publish") {
+if (process.argv[2] == "publish") {
+    console.log("* Publishing...");
     ghPages.publish(config.outputDir, {
         branch: config.publishBranch
     });
