@@ -1,0 +1,47 @@
+@enlightme-blue: #0676B6;
+@enlightme-yellow: #FFE11C;
+
+@import url("https://fonts.googleapis.com/css?family=Damion");
+@import "style/variables.less";
+
+@main-color: @enlightme-blue;
+@background-color: @enlightme-blue;
+
+// Header links
+
+@header-links-background: darken(@background-color, 15%);
+@header-links-active-background: darken(@background-color, 10%);
+
+// Header
+
+@header-title-color: @enlightme-yellow;
+@header-title-font: "Damion", Arial, sans-serif;
+@header-logo-height: 110px;
+
+// Menu
+
+@menu-background-color: #DBE6EC;
+@menu-item-hover-effect-color: darken(@enlightme-blue, 15%);
+
+// Content
+
+@content-code-block-background: #21323C;
+
+@content-blockquote-background: #BBCCD6;
+@content-blockquote-color: darken(@content-blockquote-background, 60%);
+
+// Footer
+
+@footer-text-color: darken(@enlightme-blue, 25%);
+
+
+@import "style/style.less";
+@import (inline) "style/hybrid.css";
+
+header h1 {
+    text-shadow: 0 0 5px @enlightme-yellow;
+
+    img {
+        transform: rotate(-30deg);
+    }
+}

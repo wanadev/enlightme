@@ -50,6 +50,8 @@ var config = {
     npmPackageName: appPkg.name,
     npmPackageVersion: appPkg.version,
     githubProjectUrl: (appPkg.repository && appPkg.repository.url) ? _cleanGithubUrl(appPkg.repository.url) : null,
+    npmPackageUrl: "https://www.npmjs.com/package/" + appPkg.name,
+    downloadUrl: null,
     appName: appPkg.name,
     layoutsDir: path.join(__dirname, "..", "layouts"),
     sourceDir: path.join(process.cwd(), "doc"),

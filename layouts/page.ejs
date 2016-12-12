@@ -15,6 +15,7 @@
 
     var haveMenu = typeof pages != "undefined" && pages.length > 1;
     var haveToc = typeof toc != "undefined";
+    var haveExternalLinks = githubProjectUrl || npmPackageUrl || downloadUrl;
 
     var bodyClasses = "";
     if (haveMenu || haveToc) {
@@ -38,6 +39,17 @@
     </head>
 
     <body class="<%= bodyClasses %>">
+
+        <% if (haveExternalLinks) { %>
+            <nav class="links">
+                <ul>
+                    <% if (githubProjectUrl) { %><li><a href="<%= githubProjectUrl %>">Github</a></li><% }
+                    %><% if (npmPackageUrl) { %><li><a href="<%= npmPackageUrl %>">NPM</a></li><% }
+                    %><% if (downloadUrl) { %><li><a href="<%= downloadUrl %>">Download</a></li><% } %>
+                </ul>
+            </nav>
+        <% } %>
+
         <header>
             <h1>
                 <% if (logo) { %>

@@ -6,6 +6,7 @@ html, body {
     background-color: @background-color;
 }
 
+nav.links ul,
 header,
 .content,
 footer {
@@ -16,11 +17,44 @@ footer {
 }
 
 .page-with-nav {
+    nav.links ul,
     header,
     .content,
     footer {
         max-width: @content-width + @menu-width;
     }
+}
+
+nav.links {
+    background: @header-links-background;
+
+    ul {
+        padding: 0;
+        list-style-type: none;
+        box-sizing: border-box;
+        text-align: right;
+
+        li {
+            display: inline-block;
+
+            a {
+                display: block;
+                padding: 10px 15px;
+                text-decoration: none;
+                background: @header-links-background;
+                color: @header-links-text-color;
+
+                &:hover {
+                    background: @header-links-active-background;
+                    color: @header-links-active-text-color;
+                }
+
+            }
+
+        }
+
+    }
+
 }
 
 header {
