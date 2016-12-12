@@ -14,6 +14,7 @@ var autotoc = require("metalsmith-autotoc");
 var layouts = require("metalsmith-layouts");
 var less = require("metalsmith-less");
 var ejs = require("ejs");
+var ghPages = require("gh-pages");
 
 function _cleanGithubUrl(url) {
     if (!url.match(/^(git\+)?(https:\/\/github.com\/[^\/]+\/[^\/]+?)(\.git)?$/)) {
@@ -59,7 +60,8 @@ var config = {
     tocLevels: "h2, h3, h4",
     logo: null,
     favicon: null,
-    pageFooter: "Generated using <a href=\"https://wanadev.github.io/enlightme/\">Enlight'me</a> <%= enlightmeVersion %>"
+    pageFooter: "Generated using <a href=\"https://wanadev.github.io/enlightme/\">Enlight'me</a> <%= enlightmeVersion %>",
+    publishBranch: "gh-pages"
 };
 
 if (appPkg.enlightme) {
@@ -174,3 +176,9 @@ Metalsmith(process.cwd())
             throw error;
         }
     });
+
+if (process.argv[1] == "publish") {
+    ghPages.publish(config.outputDir, {
+        branch: config.publishBranch
+    });
+}
