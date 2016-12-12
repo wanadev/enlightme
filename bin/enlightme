@@ -65,7 +65,6 @@ if (appPkg.enlightme) {
 }
 
 var footerPath = path.join(config.sourceDir, "_footer");
-    console.log(footerPath);
 if (_isFile(footerPath)) {
     config.pageFooter = fs.readFileSync(footerPath).toString();
 }

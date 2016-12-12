@@ -1,8 +1,8 @@
 html, body {
     margin: 0;
     padding: 0;
-    font-family: @main-font;
-    color: @text-color;
+    font-family: @main-text-font;
+    color: @main-text-color;
     background-color: @background-color;
 }
 
@@ -24,14 +24,15 @@ footer {
 }
 
 header {
-    padding: 20px 0;
+    padding: 40px 0;
 
     h1 {
-        font-family: @title-font;
+        margin: 0;
+        font-family: @header-title-font;
         font-weight: normal;
         line-height: 1em;
         color: @header-title-color;
-        font-size: 350%;
+        font-size: @header-title-font-size;
 
         span {
             display: inline-block;
@@ -40,6 +41,7 @@ header {
 
         img {
             vertical-align: middle;
+            height: @header-logo-height;
             max-height: @header-logo-max-height;
         }
     }
@@ -48,15 +50,14 @@ header {
 
 .content {
     padding: 0;
-    background-color: #fff;
+    color: @content-text-color;
     box-shadow: 0 0 5px rgba(0, 0, 0, .3);
     display: flex;
 
     nav {
         @nav-shadow: inset -5px 0 5px -5px rgba(0, 0, 0, .3);
-        @nav-button-shadow: inset 0 1px 0 rgba(255, 255, 255, .9),
-                            inset 0 -1px 0 rgba(0, 0, 0, .1);
-        @nav-hover-shadow: inset 5px 0 0 @main-color;
+        @nav-button-shadow: @menu-item-shadow;
+        @nav-hover-shadow: inset 5px 0 0 @menu-item-hover-effect-color;
 
         width: @menu-width;
         max-width: @menu-width;
@@ -86,7 +87,8 @@ header {
                     box-shadow: @nav-shadow, @nav-button-shadow;
 
                     &:hover, &.active {
-                        background-color: @menu-active-background-color;
+                        background-color: @menu-active-background;
+                        color: @menu-active-text-color;
                         box-shadow: @nav-hover-shadow,
                                     @nav-shadow, @nav-button-shadow;
                     }
@@ -104,11 +106,13 @@ header {
 
             li a {
                 line-height: 25px;
-                background: #fff;
+                background: @menu-toc-background;
                 box-shadow: @nav-shadow;
+                color: @menu-toc-text-color;
 
                 &:hover {
-                    color: @main-color;
+                    color: @menu-toc-active-text-color;
+                    background: @menu-toc-active-background;
                     box-shadow: @nav-hover-shadow, @nav-shadow;
                 }
 
@@ -136,49 +140,51 @@ header {
         padding: 20px;
         line-height: 1.5em;
         box-sizing: border-box;
+        background: @content-backrgound;
 
         h1, h2, h3, h4 {
-            font-family: @title-font;
+            font-family: @content-title-font;
             font-weight: normal;
             line-height: 1.5em;
-            color: @main-color;
+            color: @content-title-color;
         }
 
         h1 {
             line-height: 1em;
             margin: 0px -20px 30px -20px;
             padding: 0 20px 15px 20px;
-            font-size: 240%;
+            font-size: @content-title-h1-font-size;
             border-bottom: @main-color solid 2px;
-            color: @title-h1-text-color;
+            color: @content-title-h1-text-color;
         }
 
         h2 {
             margin: 60px 0 15px -20px;
-            font-size: 170%;
+            font-size: @content-title-h2-font-size;
             border-left: @main-color solid 5px;
             padding-left: 15px;
-            color: @title-h2-text-color;
+            color: @content-title-h2-text-color;
         }
 
         h3 {
             margin: 40px 0 15px 0;
-            font-size: 130%;
-            font-weight: bold;
-            color: @title-h3-text-color;
+            font-size: @content-title-h3-font-size;
+            color: @content-title-h3-text-color;
         }
 
         h4 {
-            color: @title-h4-text-color;
+            color: @content-title-h4-text-color;
+            font-size: @content-title-h4-font-size;
+            padding-left: 30px;
         }
 
         code {
-            font-family: @monospace-font;
-            color: @inline-code-color;
+            font-family: @content-code-font;
+            color: @content-inline-code-color;
         }
 
         a {
-            color: @link-color;
+            color: @content-link-color;
         }
 
         img {
@@ -190,9 +196,9 @@ header {
         }
 
         pre {
-            font-family: @monospace-font;
-            background: @code-block-background;
-            color: @code-block-color;
+            font-family: @content-code-font;
+            background: @content-code-block-background;
+            color: @content-code-block-color;
             margin: 0 -20px;
             padding: 20px;
             max-width: 100%;
@@ -200,7 +206,7 @@ header {
             line-height: 1.3em;
 
             code {
-                color: @code-block-color;
+                color: @content-code-block-color;
                 width: 10px;  // hack...
             }
 
@@ -216,14 +222,14 @@ header {
             margin-left: -20px;
             margin-right: -20px;
             padding: 0 20px;
-            background: @blockquote-background;
-            color: @blockquote-color;
+            background: @content-blockquote-background;
+            color: @content-blockquote-color;
             border-top: transparent solid 1px;
             border-bottom: transparent solid 1px;
             font-style: italic;
 
             &:before, &:after {
-                color: darken(@blockquote-background, 20%);
+                color: darken(@content-blockquote-background, 20%);
                 font-size: 64px;
                 font-family: Arial, sans-serif;
             }
