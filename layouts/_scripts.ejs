@@ -1,88 +1,92 @@
 <script>
 
-var MENU_UNFOLDED_CLASS = "mobile-menu-unfolded";
+(function() {
 
-var menuButton = document.getElementById("toggle-mobile-menu");
-var menuItems = document.querySelectorAll(".content nav a");
+    var MENU_UNFOLDED_CLASS = "mobile-menu-unfolded";
 
-function getAbsolutePosition(element) {
-    if (typeof(element) == "string") {
-        element = document.getElementById(element);
-    }
-    if (!(element instanceof Element)) {
-        return {x: 0, y: 0};
-    }
+    var menuButton = document.getElementById("toggle-mobile-menu");
+    var menuItems = document.querySelectorAll(".content nav a");
 
-    var css;
-    var origElement = element;
+    function getAbsolutePosition(element) {
+        if (typeof(element) == "string") {
+            element = document.getElementById(element);
+        }
+        if (!(element instanceof Element)) {
+            return {x: 0, y: 0};
+        }
 
-    try {
-        css = getComputedStyle(element);
-    } catch (e) {
-        return {x: 0, y: 0};
-    }
+        var css;
+        var origElement = element;
 
-    if (!css) {
-        return {x: 0, y: 0};
-    }
+        try {
+            css = getComputedStyle(element);
+        } catch (e) {
+            return {x: 0, y: 0};
+        }
 
-    var x = -parseInt(css.borderLeftWidth);
-    var y = -parseInt(css.borderTopWidth);
+        if (!css) {
+            return {x: 0, y: 0};
+        }
 
-    while (element.offsetParent) {
-        css = getComputedStyle(element);
+        var x = -parseInt(css.borderLeftWidth);
+        var y = -parseInt(css.borderTopWidth);
 
-        x += element.offsetLeft || 0;
-        x += parseInt(css.borderLeftWidth);
+        while (element.offsetParent) {
+            css = getComputedStyle(element);
 
-        y += element.offsetTop || 0;
-        y += parseInt(css.borderTopWidth);
+            x += element.offsetLeft || 0;
+            x += parseInt(css.borderLeftWidth);
 
-        element = element.offsetParent;
-    }
+            y += element.offsetTop || 0;
+            y += parseInt(css.borderTopWidth);
 
-    element = origElement;
+            element = element.offsetParent;
+        }
 
-    while (element.parentNode && !(element instanceof HTMLBodyElement)) {
-        x -= element.scrollLeft || 0;
-        y -= element.scrollTop || 0;
-        element = element.parentNode;
-    }
+        element = origElement;
 
-    return {x: x, y: y};
-};
+        while (element.parentNode && !(element instanceof HTMLBodyElement)) {
+            x -= element.scrollLeft || 0;
+            y -= element.scrollTop || 0;
+            element = element.parentNode;
+        }
 
-function openMenu() {
-    document.body.classList.add(MENU_UNFOLDED_CLASS);
-}
+        return {x: x, y: y};
+    };
 
-function closeMenu() {
-    document.body.classList.remove(MENU_UNFOLDED_CLASS);
-}
-
-function toggleMenu() {
-    document.body.classList.toggle(MENU_UNFOLDED_CLASS);
-}
-
-function _onMenuItemClicked(event) {
-    var href = this.getAttribute("href");
-
-    if (href[0] != "#") {
-        return;
+    function openMenu() {
+        document.body.classList.add(MENU_UNFOLDED_CLASS);
     }
 
-    event.preventDefault();
+    function closeMenu() {
+        document.body.classList.remove(MENU_UNFOLDED_CLASS);
+    }
 
-    var anchor = href.substr(1, href.length-1);
-    var anchorPosition = getAbsolutePosition(anchor);
-    document.scrollingElement.scrollTop = anchorPosition.y - menuButton.offsetHeight;
+    function toggleMenu() {
+        document.body.classList.toggle(MENU_UNFOLDED_CLASS);
+    }
 
-    closeMenu();
-}
+    function _onMenuItemClicked(event) {
+        var href = this.getAttribute("href");
 
-menuButton.onclick = toggleMenu;
-menuItems.forEach(function(item) {
-    item.onclick = _onMenuItemClicked;
-});
+        if (href[0] != "#") {
+            return;
+        }
+
+        event.preventDefault();
+
+        var anchor = href.substr(1, href.length-1);
+        var anchorPosition = getAbsolutePosition(anchor);
+        document.scrollingElement.scrollTop = anchorPosition.y - menuButton.offsetHeight;
+
+        closeMenu();
+    }
+
+    menuButton.onclick = toggleMenu;
+    menuItems.forEach(function(item) {
+        item.onclick = _onMenuItemClicked;
+    });
+
+}();
 
 </script>
