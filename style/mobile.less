@@ -1,0 +1,126 @@
+.header-reduced {
+
+    header {
+        padding: 20px;
+    }
+}
+
+.header-mobile {
+
+    header {
+
+        h1 {
+            text-align: center;
+            line-height: 1.3em;
+
+            span {
+                display: block;
+            }
+
+        }
+
+    }
+
+}
+
+.mobile-view {
+    @mobile-menu-width: 250px;
+    @mobile-menu-transition: all .3s;
+
+    .page {
+        overflow-x: hidden;
+
+        .content {
+            display: block;
+            box-shadow: none;
+        }
+
+        #toggle-mobile-menu,
+        nav.links,
+        header,
+        .content article,
+        footer {
+            transition: @mobile-menu-transition;
+        }
+
+        #toggle-mobile-menu {
+            position: fixed;
+            display: block;
+            z-index: 43;
+        }
+
+        nav.links {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 42;
+        }
+
+        header {
+            margin-top: @header-links-height;
+        }
+
+        .content nav {
+            position: fixed;
+            top: 0;
+            left: -@mobile-menu-width;
+            bottom: 0;
+            width: @mobile-menu-width;
+            min-width: @mobile-menu-width;
+            max-width: @mobile-menu-width;
+            overflow-y: auto;
+            transition: @mobile-menu-transition;
+        }
+
+    }
+
+    .mobile-menu-unfolded .page {
+
+        #toggle-mobile-menu,
+        nav.links,
+        header,
+        .content article,
+        footer {
+            transform: translate(@mobile-menu-width, 0);
+        }
+
+        .content nav {
+            transform: translate(@mobile-menu-width, 0);
+        }
+
+    }
+
+}
+
+
+// reduced
+
+@media screen and (max-width: @content-width) {
+    .header-reduced();
+}
+
+@media screen and (max-width: (@content-width + @menu-width)) {
+
+    .page-with-nav {
+        .header-reduced();
+    }
+
+}
+
+// mobile
+
+@media screen and (max-width: 600px) {
+    .mobile-view();
+    .header-mobile();
+}
+
+@media screen and (max-width: (600px + @menu-width)) {
+    .mobile-view();
+
+    .page-with-nav {
+        .header-mobile();
+    }
+
+}
+

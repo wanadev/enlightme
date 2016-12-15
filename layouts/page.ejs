@@ -40,42 +40,53 @@
 
     <body class="<%= bodyClasses %>">
 
-        <% if (haveExternalLinks) { %>
-            <nav class="links">
-                <ul>
-                    <% if (githubProjectUrl) { %><li><a href="<%= githubProjectUrl %>">Github</a></li><% }
-                    %><% if (npmPackageUrl) { %><li><a href="<%= npmPackageUrl %>">NPM</a></li><% }
-                    %><% if (downloadUrl) { %><li><a href="<%= downloadUrl %>">Download</a></li><% } %>
-                </ul>
-            </nav>
-        <% } %>
-
-        <header>
-            <h1>
-                <% if (logo) { %>
-                    <img src="<%= logo %>" %> alt="<%= appName %> logo" />
-                <% } %>
-                <span><%= appName %></span>
-            </h1>
-        </header>
-        <div class="content">
+        <div class="page">
 
             <% if (haveMenu || haveToc) { %>
-                <nav>
-                    <% if (haveMenu) { %>
-                        <% include _menu.ejs %>
-                    <% } else if (haveToc) { %>
-                        <% include _toc.ejs %>
-                    <% } %>
+                <div id="toggle-mobile-menu" title="Toggle menu" onclick="document.body.classList.toggle('mobile-menu-unfolded');">☰</div>
+            <% } %>
+
+            <% if (haveExternalLinks) { %>
+                <nav class="links">
+                    <ul>
+                        <% if (githubProjectUrl) { %><li><a href="<%= githubProjectUrl %>">Github</a></li><% }
+                        %><% if (npmPackageUrl) { %><li><a href="<%= npmPackageUrl %>">NPM</a></li><% }
+                        %><% if (downloadUrl) { %><li><a href="<%= downloadUrl %>">Download</a></li><% } %>
+                    </ul>
                 </nav>
             <% } %>
-            <article>
-                <%- contents %>
-            </article>
+
+            <header>
+                <h1>
+                    <% if (logo) { %>
+                        <img src="<%= logo %>" %> alt="<%= appName %> logo" />
+                    <% } %>
+                    <span><%= appName %></span>
+                </h1>
+            </header>
+
+            <div class="content">
+
+                <% if (haveMenu || haveToc) { %>
+                    <nav>
+                        <% if (haveMenu) { %>
+                            <% include _menu.ejs %>
+                        <% } else if (haveToc) { %>
+                            <% include _toc.ejs %>
+                        <% } %>
+                    </nav>
+                <% } %>
+                <article>
+                    <%- contents %>
+                </article>
+            </div>
+
+            <footer>
+                <%- _ejs.render(pageFooter, _config) %>
+            </footer>
+
         </div>
-        <footer>
-            <%- _ejs.render(pageFooter, _config) %>
-        </footer>
+
     </body>
 
 </html>
