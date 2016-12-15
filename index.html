@@ -16,35 +16,137 @@
 
     <body class="">
 
-        
-            <nav class="links">
-                <ul>
-                    <li><a href="https://github.com/wanadev/enlightme">Github</a></li><li><a href="https://www.npmjs.com/package/enlightme">NPM</a></li>
-                </ul>
-            </nav>
-        
-
-        <header>
-            <h1>
-                
-                    <img src="enlightme-logo.svg"  alt="Enlight&#39;me logo" />
-                
-                <span>Enlight&#39;me</span>
-            </h1>
-        </header>
-        <div class="content">
+        <div class="page">
 
             
-            <article>
-                <p><strong>Enlight&#39;me</strong> is a static site generator based on <a href="http://www.metalsmith.io/">Metalsmith</a> that let you
+
+            
+                <nav class="links">
+                    <ul>
+                        <li><a href="https://github.com/wanadev/enlightme">Github</a></li><li><a href="https://www.npmjs.com/package/enlightme">NPM</a></li>
+                    </ul>
+                </nav>
+            
+
+            <header>
+                <h1>
+                    
+                        <img src="enlightme-logo.svg"  alt="Enlight&#39;me logo" />
+                    
+                    <span>Enlight&#39;me</span>
+                </h1>
+            </header>
+
+            <div class="content">
+
+                
+                <article>
+                    <p><strong>Enlight&#39;me</strong> is a static site generator based on <a href="http://www.metalsmith.io/">Metalsmith</a> that let you
 build pretty Github pages for your projects without hassles. Just put some Markdown
 files in a <code>doc/</code> folder of your repo, and you&#39;r done!</p>
 
-            </article>
+                </article>
+            </div>
+
+            <footer>
+                Generated using <a href="https://wanadev.github.io/enlightme/">Enlight'me</a> 0.0.0
+            </footer>
+
         </div>
-        <footer>
-            Generated using <a href="https://wanadev.github.io/enlightme/">Enlight'me</a> 0.0.0
-        </footer>
+
+        <script>
+
+(function() {
+
+    var MENU_UNFOLDED_CLASS = "mobile-menu-unfolded";
+
+    var menuButton = document.getElementById("toggle-mobile-menu");
+    var menuItems = document.querySelectorAll(".content nav a");
+
+    function getAbsolutePosition(element) {
+        if (typeof(element) == "string") {
+            element = document.getElementById(element);
+        }
+        if (!(element instanceof Element)) {
+            return {x: 0, y: 0};
+        }
+
+        var css;
+        var origElement = element;
+
+        try {
+            css = getComputedStyle(element);
+        } catch (e) {
+            return {x: 0, y: 0};
+        }
+
+        if (!css) {
+            return {x: 0, y: 0};
+        }
+
+        var x = -parseInt(css.borderLeftWidth);
+        var y = -parseInt(css.borderTopWidth);
+
+        while (element.offsetParent) {
+            css = getComputedStyle(element);
+
+            x += element.offsetLeft || 0;
+            x += parseInt(css.borderLeftWidth);
+
+            y += element.offsetTop || 0;
+            y += parseInt(css.borderTopWidth);
+
+            element = element.offsetParent;
+        }
+
+        element = origElement;
+
+        while (element.parentNode && !(element instanceof HTMLBodyElement)) {
+            x -= element.scrollLeft || 0;
+            y -= element.scrollTop || 0;
+            element = element.parentNode;
+        }
+
+        return {x: x, y: y};
+    };
+
+    function openMenu() {
+        document.body.classList.add(MENU_UNFOLDED_CLASS);
+    }
+
+    function closeMenu() {
+        document.body.classList.remove(MENU_UNFOLDED_CLASS);
+    }
+
+    function toggleMenu() {
+        document.body.classList.toggle(MENU_UNFOLDED_CLASS);
+    }
+
+    function _onMenuItemClicked(event) {
+        var href = this.getAttribute("href");
+
+        if (href[0] != "#") {
+            return;
+        }
+
+        event.preventDefault();
+
+        var anchor = href.substr(1, href.length-1);
+        var anchorPosition = getAbsolutePosition(anchor);
+        document.scrollingElement.scrollTop = anchorPosition.y - menuButton.offsetHeight;
+
+        closeMenu();
+    }
+
+    menuButton.onclick = toggleMenu;
+    menuItems.forEach(function(item) {
+        item.onclick = _onMenuItemClicked;
+    });
+
+}();
+
+</script>
+
     </body>
 
 </html>
