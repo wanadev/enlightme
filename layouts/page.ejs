@@ -43,7 +43,7 @@
         <div class="page">
 
             <% if (haveMenu || haveToc) { %>
-                <div id="toggle-mobile-menu" title="Toggle menu" onclick="document.body.classList.toggle('mobile-menu-unfolded');">☰</div>
+                <div id="toggle-mobile-menu" title="Toggle menu">☰</div>
             <% } %>
 
             <% if (haveExternalLinks) { %>
@@ -87,6 +87,7 @@
 
         </div>
 
+        <% include _scripts.ejs %>
     </body>
 
 </html>
