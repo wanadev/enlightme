@@ -1,6 +1,6 @@
 {
   "name": "enlightme",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Enlighten your users with a beautiful documentation",
   "main": "bin/enlightme",
   "directories": {
