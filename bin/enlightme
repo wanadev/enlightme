@@ -181,5 +181,9 @@ if (process.argv[2] == "publish") {
     console.log("* Publishing...");
     ghPages.publish(config.outputDir, {
         branch: config.publishBranch
+    }, function(error) {
+        if (error) {
+            console.error(error);
+        }
     });
 }
