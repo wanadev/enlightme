@@ -4,7 +4,7 @@
 
     <head>
         <meta charset="UTF-8" />
-        <title>Enlight&#39;me</title>
+        <title>Quick Start - Enlight&#39;me</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         
             <link rel="shortcut icon" type="image/png" href="favicon.svg" />
@@ -50,13 +50,54 @@
         
             
             <li>
-                <a href="index.html" class="active">Home</a>
+                <a href="index.html" >Home</a>
                 
             </li>
         
             
             <li>
-                <a href="quick-start.html" >Quick Start</a>
+                <a href="quick-start.html" class="active">Quick Start</a>
+                
+                    
+
+    
+    <ul class="toc">
+        
+            <li>
+                <a href="#installing-enlight-me">Installing Enlight'me</a>
+                
+            </li>
+        
+            <li>
+                <a href="#creating-your-first-enlight-me-site">Creating Your First Enlight'me Site</a>
+                
+                    
+    <ul class="toc">
+        
+            <li>
+                <a href="#1-write-some-markdown-files">1. Write Some Markdown Files</a>
+                
+            </li>
+        
+            <li>
+                <a href="#2-generate-the-site">2. Generate The site</a>
+                
+            </li>
+        
+            <li>
+                <a href="#3-publish-to-github-pages">3. Publish to Github Pages</a>
+                
+            </li>
+        
+    </ul>
+
+                
+            </li>
+        
+    </ul>
+
+
+
                 
             </li>
         
@@ -67,10 +108,46 @@
                     </nav>
                 
                 <article>
-                    <p><strong>Enlight&#39;me</strong> is a static site generator based on <a href="http://www.metalsmith.io/">Metalsmith</a> that let you
-build pretty Github pages for your projects without hassles. Just put some Markdown
-files in a <code>doc/</code> folder of your repo, and you&#39;r done!</p>
-<p>To start using Enlight&#39;me, you can read the <a href="./quick-start.html">Quick Start</a>.</p>
+                    <h1 id="quick-start">Quick Start</h1>
+<p><strong>Enlight'me</strong> is a very simple static site generator that can help you to
+build your application / library documentation easily. This document will show
+you the basics to generate your first Enlight'me site in <strong>only 5 minutes</strong>.</p>
+<h2 id="installing-enlight-me">Installing Enlight'me</h2>
+<p>First of all, install Enlight'me on your computer (we assume you have already
+installed Node.js and NPM):</p>
+<pre><code>npm install -g enlightme
+</code></pre><p>That's it for the installation.</p>
+<h2 id="creating-your-first-enlight-me-site">Creating Your First Enlight'me Site</h2>
+<p>Creating your Enlight'me-generated documentation website requires only 3 (short
+and easy) steps described bellow.</p>
+<h3 id="1-write-some-markdown-files">1. Write Some Markdown Files</h3>
+<p>First of all, you have to write your documentation in the <a href="https://guides.github.com/features/mastering-markdown/">Markdown</a> format:</p>
+<ul>
+<li>Create a <code>doc/</code> folder at the root of your project,</li>
+<li>Write some Markdown files in it,</li>
+<li>and you're done!</li>
+</ul>
+<p><strong>Example:</strong></p>
+<pre><code>MyProject/
+    |
+    +-- doc/
+    |   |
+    |   o-- index.md
+    |   |
+    |   o-- quick-start.md
+    |
+    o-- package.json
+</code></pre><h3 id="2-generate-the-site">2. Generate The site</h3>
+<p>To generate the HTML version of your site, just type the following command:</p>
+<pre><code>enlightme
+</code></pre><p>The generated content is created in the <code>doc.generated/</code> folder, located at
+the root of your project.</p>
+<p><strong>TIP:</strong> you can add this folder to your <code>.gitignore</code> file to avoid committing
+it accidentally.</p>
+<h3 id="3-publish-to-github-pages">3. Publish to Github Pages</h3>
+<p>Publishing the site on your <a href="https://pages.github.com/">Github Pages</a> can be done with the following command:</p>
+<pre><code>enlightme publish
+</code></pre><p>Your site is now online. Wow, way too easy isn't it?</p>
 
                 </article>
             </div>
