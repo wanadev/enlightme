@@ -1,5 +1,7 @@
 # Enlight'me
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/wanadev/enlightme.svg)](https://greenkeeper.io/)
+
 > Enlighten your users with a beautiful documentation
 
 **Enlight'me** is a static site generator based on [Metalsmith][] that let you
