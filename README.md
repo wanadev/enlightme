@@ -44,9 +44,9 @@ If you found a bug, please [open an issue on Github][gh-issue] with as much info
 
 Please consider [filing a bug][gh-issue] before starting to work on a new feature. This will allow us to discuss the best way to do it. This is of course not necessary if you just want to fix some typo or small errors in the code.
 
-### Codding Style / Lint
+### Coding Style / Lint
 
-To check codding style, run the follwoing command:
+To check coding style, run the follwoing command:
 
     npm run lint
 
