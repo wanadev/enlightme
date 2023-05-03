@@ -7,7 +7,7 @@
     "bin": "./bin"
   },
   "dependencies": {
-    "ejs": "^2.5.5",
+    "ejs": "^3.1.9",
     "gh-pages": "^0.12.0",
     "metalsmith": "^2.3.0",
     "metalsmith-autotoc": "^0.1.3",
