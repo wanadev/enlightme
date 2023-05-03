@@ -11,7 +11,7 @@
             <li>
                 <a href="<%= pages[i].path.replace(/\.md$/, ".html") %>" <%- (isCurrentPage) ? "class=\"active\"" : "" %>><%= pages[i].title || pages[i].path %></a>
                 <% if (haveToc && isCurrentPage) { %>
-                    <% include _toc.ejs %>
+                    <%- include("_toc") %>
                 <% } %>
             </li>
         <% } %>

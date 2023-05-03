@@ -70,9 +70,9 @@
                 <% if (haveMenu || haveToc) { %>
                     <nav>
                         <% if (haveMenu) { %>
-                            <% include _menu.ejs %>
+                            <%- include("_menu") %>
                         <% } else if (haveToc) { %>
-                            <% include _toc.ejs %>
+                            <%- include("_toc") %>
                         <% } %>
                     </nav>
                 <% } %>
@@ -87,7 +87,7 @@
 
         </div>
 
-        <% include _scripts.ejs %>
+        <%- include("_scripts") %>
     </body>
 
 </html>
