@@ -1,7 +1,7 @@
 # Enlight'me
 
 [![Lint and test](https://github.com/wanadev/enlightme/actions/workflows/tests.yml/badge.svg)](https://github.com/wanadev/enlightme/actions/workflows/tests.yml)
-[![NPM Version](http://img.shields.io/npm/v/stonejs.svg?style=flat)](https://www.npmjs.com/package/stonejs)
+[![NPM Version](http://img.shields.io/npm/v/enlightme.svg?style=flat)](https://www.npmjs.com/package/enlightme)
 [![License](http://img.shields.io/npm/l/enlightme.svg?style=flat)](https://github.com/wanadev/enlightme/blob/master/LICENSE)
 [![Discord](https://img.shields.io/badge/chat-Discord-8c9eff?logo=discord&logoColor=ffffff)](https://discord.gg/BmUkEdMuFp)
 
