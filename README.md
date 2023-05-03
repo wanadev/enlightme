@@ -1,5 +1,11 @@
 # Enlight'me
 
+[![Lint and test](https://github.com/wanadev/enlightme/actions/workflows/tests.yml/badge.svg)](https://github.com/wanadev/enlightme/actions/workflows/tests.yml)
+[![NPM Version](http://img.shields.io/npm/v/stonejs.svg?style=flat)](https://www.npmjs.com/package/stonejs)
+[![License](http://img.shields.io/npm/l/enlightme.svg?style=flat)](https://github.com/wanadev/enlightme/blob/master/LICENSE)
+[![Discord](https://img.shields.io/badge/chat-Discord-8c9eff?logo=discord&logoColor=ffffff)](https://discord.gg/BmUkEdMuFp)
+
+
 > Enlighten your users with a beautiful documentation
 
 **Enlight'me** is a static site generator based on [Metalsmith][] that let you
