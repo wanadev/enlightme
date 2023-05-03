@@ -58,4 +58,18 @@ To check codding style, run the follwoing command:
 
 * **[NEXT]** (changes on master that have not been released yet):
 
-    * Added a lint command in package.json
+    * Nothing yet ;)
+
+* **v0.2.0:**
+
+    * Added a lint command in package.json (@flozz)
+    * Fixed wrong dependencies: added missing lodash, and removed unnecessary request lib (@jbghoul, #7)
+    * Updated dependencies (@jbghoul, #7)
+
+* **v0.1.1:**
+
+    * Fixed a syntax error in a template (@flozz)
+
+* **v0.1.0:**
+
+    * Initial release
