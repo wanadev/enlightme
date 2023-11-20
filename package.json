@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "ejs": "^3.1.9",
-    "gh-pages": "^5.0.0",
+    "gh-pages": "^6.1.0",
     "lodash": "^4.17.21",
     "metalsmith": "^2.5.1",
     "metalsmith-autotoc": "^0.1.3",
